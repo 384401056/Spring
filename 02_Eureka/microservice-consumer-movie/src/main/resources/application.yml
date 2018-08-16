@@ -1,0 +1,8 @@
+#指定服务端口
+server:
+ port: 8080
+
+loggin:
+  level:
+    root: INFO
+    com.blueice: DEBUG

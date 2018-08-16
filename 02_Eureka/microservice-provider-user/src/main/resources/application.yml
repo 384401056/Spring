@@ -1,0 +1,23 @@
+#ָ指定服务端口
+server:
+ port: 8082
+
+spring:
+ datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/springcloudtest
+  username: root
+  password: 123456
+
+jpa:
+  hibernate:
+   ddl-auto: update  # 创建表时用create  以后用update
+   show-sql: true
+
+loggin:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.blueice: DEBUG
