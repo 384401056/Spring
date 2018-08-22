@@ -1,4 +1,4 @@
-package com.blueice.cloud.microserviceconsumermovie;
+package com.blueice.cloud.microservicespringcloud;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MicroserviceConsumerMovieApplicationTests {
+public class MicroserviceSpringCloudApplicationTests {
 
 	@Test
 	public void contextLoads() {
