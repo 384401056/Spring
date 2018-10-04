@@ -28,17 +28,17 @@ public class WeatherDataSyncJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-        //根据Quartz的配置，会重复执行此处的代码
-        List<City> cityList = null;
-        try {
-            cityList = cityDataService.listCity();
-            for(City city:cityList){
-//                weatherDataService.syncDataByCityId(city.getCityId());
-                weatherDataService.syncDataByCityName(city.getCityName());
-            }
-        }catch (Exception ex){
-            logger.info("获取城市信息异常！");
-        }
+//        //根据Quartz的配置，会重复执行此处的代码
+//        List<City> cityList = null;
+//        try {
+//            cityList = cityDataService.listCity();
+//            for(City city:cityList){
+////                weatherDataService.syncDataByCityId(city.getCityId());
+//                weatherDataService.syncDataByCityName(city.getCityName());
+//            }
+//        }catch (Exception ex){
+//            logger.info("获取城市信息异常！");
+//        }
 
         logger.info("天气数据同步成功！");
     }
