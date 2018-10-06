@@ -1,6 +1,7 @@
 package com.blueice.weathercollection.job;
 
 import com.blueice.weathercollection.bean.City;
+import com.blueice.weathercollection.feign.CityClient;
 import com.blueice.weathercollection.service.WeatherDataCollectionService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -21,6 +22,9 @@ public class WeatherDataSyncJob extends QuartzJobBean {
     private final static Logger logger = LoggerFactory.getLogger(WeatherDataSyncJob.class);
 
     @Autowired
+    private CityClient cityClient; //使用feign获取数据
+
+    @Autowired
     private WeatherDataCollectionService service;
 
     @Override
@@ -28,21 +32,13 @@ public class WeatherDataSyncJob extends QuartzJobBean {
         //根据Quartz的配置，会重复执行此处的代码
         List<City> cityList = null;
         try {
-            cityList = new ArrayList<>();
-            City city = new City();
-            city.setCityId("101280601");
-            cityList.add(city);
+            cityList = cityClient.getListCity(); //使用feign获取数据
 
             for(City ct:cityList){
                 String cityId = ct.getCityId();
                 service.syncDataByCityId(cityId);
             }
 
-//            cityList = cityDataService.listCity();
-//            for(City city:cityList){
-////                weatherDataService.syncDataByCityId(city.getCityId());
-//                weatherDataService.syncDataByCityName(city.getCityName());
-//            }
         }catch (Exception ex){
             logger.error("获取城市信息异常！", ex);
             throw new RuntimeException("获取城市信息异常!", ex);

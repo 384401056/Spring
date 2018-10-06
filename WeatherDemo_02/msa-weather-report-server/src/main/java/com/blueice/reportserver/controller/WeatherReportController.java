@@ -1,6 +1,8 @@
 package com.blueice.reportserver.controller;
 
 import com.blueice.reportserver.bean.City;
+import com.blueice.reportserver.feign.CityClient;
+import com.blueice.reportserver.feign.WeatherDataClient;
 import com.blueice.reportserver.service.WeatherReportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,9 @@ public class WeatherReportController {
     @Autowired
     WeatherReportService weatherReportService;
 
+    @Autowired
+    CityClient cityClient; //使用feign
+
     private final static Logger logger = LoggerFactory.getLogger(WeatherReportController.class);
 
     @GetMapping("/cityId/{cityId}")
@@ -31,19 +36,20 @@ public class WeatherReportController {
 
         List<City> cityList = null;
         try {
-            cityList = new ArrayList<>();
-            City city = new City();
-            city.setCityId("101280601");
-            city.setCityName("深圳");
-            cityList.add(city);
+            cityList = cityClient.getListCity(); //使用feign消费服务
+//            cityList = new ArrayList<>();
+//            City city = new City();
+//            city.setCityId("101280601");
+//            city.setCityName("深圳");
+//            cityList.add(city);
         }catch (Exception ex){
             logger.error("获取城市信息失败！");
             throw new RuntimeException("获取城市信息失败！", ex);
         }
         model.addAttribute("title","我的天气预报");
         model.addAttribute("cityId", cityId);
-        model.addAttribute("report", weatherReportService.getDataByCityId(cityId));
         model.addAttribute("cityList", cityList);
+        model.addAttribute("report", weatherReportService.getDataByCityId(cityId));
         return new ModelAndView("report","reportModel",model);
     }
 }
