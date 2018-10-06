@@ -1,0 +1,13 @@
+#指定端口
+server:
+ port: 8083
+
+# 此名称会在服务注册中心显示 。
+spring:
+ application:
+  name: city-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

@@ -1,0 +1,13 @@
+#指定端口
+server:
+ port: 8081
+
+# 此名称会在服务注册中心显示 。
+spring:
+ application:
+  name: eureka-client
+åç
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
