@@ -14,19 +14,21 @@ public class QuartzConfiguration {
 
     /**
      * 定义了一个特定的Job,名为:weatherDataSyncJob
+     *
      * @return
      */
     @Bean
-    public JobDetail weatherDataSyncJobJobDetail(){
+    public JobDetail weatherDataSyncJobJobDetail() {
         return JobBuilder.newJob(WeatherDataSyncJob.class).withIdentity("weatherDataSyncJob").storeDurably().build();
     }
 
     /**
      * 定义了一个触发器，来定时触发Job.
+     *
      * @return
      */
     @Bean
-    public Trigger sampleJobTrigger(){
+    public Trigger sampleJobTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
                 .withIntervalInMinutes(5).repeatForever(); //每5分钟重复一次
 

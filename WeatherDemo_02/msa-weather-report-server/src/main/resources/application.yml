@@ -1,11 +1,11 @@
 #指定端口
 server:
- port: 8080
+  port: 8081
 
 # 此名称会在服务注册中心显示 。
 spring:
- application:
-  name: report-server
+  application:
+    name: report-server
 
 eureka:
   client:

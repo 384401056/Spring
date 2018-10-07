@@ -1,15 +1,15 @@
 #ָ指定服务端口
 server:
- port: 8084
+  port: 8084
 
 spring:
- datasource:
-  driver-class-name: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/springcloudtest
-  username: root
-  password: 123456
- application:
-  name: microservice-provider-user # 此名称会在服务注册中心显示 。
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloudtest
+    username: root
+    password: 123456
+  application:
+    name: microservice-provider-user # 此名称会在服务注册中心显示 。
 
 eureka:
   client:
@@ -20,8 +20,8 @@ eureka:
 
 jpa:
   hibernate:
-   ddl-auto: update  # 创建表时用create  以后用update
-   show-sql: true
+    ddl-auto: update  # 创建表时用create  以后用update
+    show-sql: true
 
 loggin:
   level:

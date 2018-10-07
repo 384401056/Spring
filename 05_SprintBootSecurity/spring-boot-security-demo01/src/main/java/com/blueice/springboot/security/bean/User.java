@@ -10,7 +10,7 @@ public class User {
     private String email;
 
     //必须要有
-    public User(){
+    public User() {
 
     }
 

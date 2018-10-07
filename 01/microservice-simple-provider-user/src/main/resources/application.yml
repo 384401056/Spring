@@ -1,15 +1,15 @@
 #ָ指定服务端口
 server:
- port: 8082
+  port: 8082
 
 spring:
- datasource:
-  driver-class-name: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/sakila
-  username: root
-  password: 123456
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sakila
+    username: root
+    password: 123456
 
 jpa:
   hibernate:
-   ddl-auto: update  # 创建表时用create  以后用update
+    ddl-auto: update  # 创建表时用create  以后用update
   show-sql: true

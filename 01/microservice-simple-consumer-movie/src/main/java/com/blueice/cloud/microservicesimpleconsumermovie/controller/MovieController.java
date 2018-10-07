@@ -18,8 +18,8 @@ public class MovieController {
     RestTemplate restTemplate;
 
     @GetMapping("/movie/{id}")
-    public User getUserById(@PathVariable Long id){
+    public User getUserById(@PathVariable Long id) {
         //调用一个微服务.
-        return restTemplate.getForObject("http://localhost:8082/user/"+id, User.class);
+        return restTemplate.getForObject("http://localhost:8082/user/" + id, User.class);
     }
 }

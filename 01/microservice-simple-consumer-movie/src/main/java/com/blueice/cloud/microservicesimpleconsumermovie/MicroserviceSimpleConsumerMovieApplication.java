@@ -8,13 +8,13 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class MicroserviceSimpleConsumerMovieApplication {
 
-	//生成RestTemplate的实例。否则在@Autowired中无法使用。
-	@Bean
-	public RestTemplate restTemplate(){
-		return new RestTemplate();
-	}
+    //生成RestTemplate的实例。否则在@Autowired中无法使用。
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MicroserviceSimpleConsumerMovieApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MicroserviceSimpleConsumerMovieApplication.class, args);
+    }
 }

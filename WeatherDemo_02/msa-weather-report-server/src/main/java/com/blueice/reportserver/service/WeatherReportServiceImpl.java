@@ -4,6 +4,7 @@ import com.blueice.reportserver.bean.Weather;
 import com.blueice.reportserver.bean.WeatherResponse;
 import com.blueice.reportserver.controller.WeatherReportController;
 import com.blueice.reportserver.feign.CityClient;
+import com.blueice.reportserver.feign.DataClient;
 import com.blueice.reportserver.feign.WeatherDataClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -21,15 +22,20 @@ public class WeatherReportServiceImpl implements WeatherReportService {
     @Autowired
     RestTemplate restTemplate;
 
+//    @Autowired
+//    WeatherDataClient weatherDataClient; //使用feign消费服务
+
     @Autowired
-    WeatherDataClient weatherDataClient; //使用feign消费服务
+    DataClient dataClient;
 
     private final static Logger logger = LoggerFactory.getLogger(WeatherReportServiceImpl.class);
 
     @Override
     public Weather getDataByCityId(String cityId) {
 
-        return weatherDataClient.getDataByCityId(cityId).getData(); //使用feign消费服务
+        return dataClient.getDataByCityId(cityId).getData(); //使用feign+zuul消费服务
+
+//        return weatherDataClient.getDataByCityId(cityId).getData(); //使用feign消费服务
 
 //        String url = "http://localhost:9090/weather/cityId/" + cityId;
 //        ObjectMapper mapper = new ObjectMapper(); //用于json解析

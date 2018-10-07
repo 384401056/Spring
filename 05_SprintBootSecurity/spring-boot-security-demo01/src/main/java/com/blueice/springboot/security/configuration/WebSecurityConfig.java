@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 用来定义安全策略，如哪些url路径需要经过授权才能访问，哪些不用。
      * 如，”/”就不需要授权就可以访问，
      * 即我们可以正常访问https://localhost:8443/SpringBootBase/，而不需要用户授权。
+     *
      * @param http
      * @throws Exception
      */
