@@ -1,11 +1,11 @@
 #指定端口
 server:
- port: 8083
+  port: 8083
 
 # 此名称会在服务注册中心显示 。
 spring:
- application:
-  name: city-server
+  application:
+    name: city-server
 
 eureka:
   client:

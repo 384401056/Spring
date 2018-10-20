@@ -1,12 +1,12 @@
 #指定服务端口
 server:
- port: 8080
+  port: 8080
 
 
 
 spring:
- application:
-  name: microservice-consumer-movie # 此名称会在服务注册中心显示 。
+  application:
+    name: microservice-consumer-movie # 此名称会在服务注册中心显示 。
 
 eureka:
   client:

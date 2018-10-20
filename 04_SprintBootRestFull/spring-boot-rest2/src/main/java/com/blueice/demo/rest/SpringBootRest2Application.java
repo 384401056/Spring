@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @SpringBootApplication
 public class SpringBootRest2Application {
-	public static void main(String[] args) {
-		SpringApplication.run(SpringBootRest2Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootRest2Application.class, args);
+    }
 }

@@ -8,6 +8,7 @@ import com.blueice.reportserver.bean.Weather;
 public interface WeatherReportService {
     /**
      * 根据城市ID获取天气信息
+     *
      * @param cityId
      * @return
      */

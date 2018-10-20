@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.Optional;
 
-import static sun.misc.Version.print;
+import java.util.Optional;
 
 /**
  * Created by Administrator on 2018/8/16.
@@ -21,12 +20,7 @@ public class UserController {
     UserDao userDao;
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable Long id){
-        try {
-            return userDao.findById(id).get();
-        }catch (Exception ex){
-            System.out.println(ex.getMessage());
-            return null;
-        }
+    public User getUser(@PathVariable Long id) {
+        return userDao.findById(id).get();
     }
 }

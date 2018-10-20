@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Bean;
  * Created by Administrator on 2018/8/22.
  */
 
-public class User{
+public class User {
     private Long id;
     private String name;
     private String email;
 
     //必须要有
-    public User(){
+    public User() {
 
     }
 

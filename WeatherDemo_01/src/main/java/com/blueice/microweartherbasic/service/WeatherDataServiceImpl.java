@@ -55,6 +55,7 @@ public class WeatherDataServiceImpl implements WeatherDataService {
 
     /**
      * 保存数据到Redis数据库
+     *
      * @param url
      */
     private void saveWeatherData(String url) {

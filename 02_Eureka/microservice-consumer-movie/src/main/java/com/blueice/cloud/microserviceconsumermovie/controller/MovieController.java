@@ -28,24 +28,25 @@ public class MovieController {
     LoadBalancerClient loadBalancerClient;
 
     @GetMapping("/movie/{id}")
-    public User getUserById(@PathVariable Long id){
+    public User getUserById(@PathVariable Long id) {
 
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");
-        System.out.println("111:"+ serviceInstance.getHost()+":"+serviceInstance.getPort());
+        System.out.println("111:" + serviceInstance.getHost() + ":" + serviceInstance.getPort());
 
         //通过Applicatname调用另一个微服务.
-        return restTemplate.getForObject("http://microservice-provider-user/user/"+id, User.class);
+        return restTemplate.getForObject("http://microservice-provider-user/user/" + id, User.class);
     }
 
     @GetMapping("/movie/list")
-    public List<User> getUserList(){
+    public List<User> getUserList() {
 
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");
-        System.out.println("111:"+ serviceInstance.getHost()+":"+serviceInstance.getPort());
+        System.out.println("111:" + serviceInstance.getHost() + ":" + serviceInstance.getPort());
 
         return restTemplate.exchange("http://microservice-provider-user/userlist",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<User>>() {}).getBody();
+                new ParameterizedTypeReference<List<User>>() {
+                }).getBody();
     }
 }

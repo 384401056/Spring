@@ -20,20 +20,20 @@ public class UserController {
     UserDao userDao;
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable Long id){
+    public User getUser(@PathVariable Long id) {
         try {
             return userDao.findById(id).get();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return null;
         }
     }
 
     @GetMapping("/userlist")
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         try {
             return userDao.findAll();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return null;
         }

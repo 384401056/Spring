@@ -1,19 +1,19 @@
 //代码块中脚本优先执行
 buildscript {
-	//定义动态属性
-	ext {
-		springBootVersion = '2.0.4.RELEASE'
-	}
+    //定义动态属性
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
 
-	//使用的仓库
-	repositories {
-		mavenCentral()
-	}
+    //使用的仓库
+    repositories {
+        mavenCentral()
+    }
 
-	//依赖关系
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    //依赖关系
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
@@ -26,10 +26,10 @@ version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

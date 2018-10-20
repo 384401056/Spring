@@ -1,6 +1,29 @@
 /01/.idea
-WeatherDemo_02/jar/micro-weather-eureka-server-0.0.1-SNAPSHOT.jar
-WeatherDemo_02/jar/msa-weather-city-server-0.0.1-SNAPSHOT.jar
-WeatherDemo_02/jar/msa-weather-collection-server-0.0.1-SNAPSHOT.jar
-WeatherDemo_02/jar/msa-weather-data-server-0.0.1-SNAPSHOT.jar
-WeatherDemo_02/jar/msa-weather-report-server-0.0.1-SNAPSHOT.jar
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.jar
+*.iws
+*.iml
+*.ipr
+/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+

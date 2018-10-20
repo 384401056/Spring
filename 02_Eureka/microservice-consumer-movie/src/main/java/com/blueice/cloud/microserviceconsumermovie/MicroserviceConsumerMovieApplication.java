@@ -12,13 +12,13 @@ import org.springframework.web.client.RestTemplate;
 //@RibbonClient(name = "microservice-provider-user", configuration = RibbonConfiguration.class) //指定Ribbon的规则
 public class MicroserviceConsumerMovieApplication {
 
-	@Bean
-	@LoadBalanced //让RestTemplate具备了Ribbon负债均衡的能力
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    @LoadBalanced //让RestTemplate具备了Ribbon负债均衡的能力
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MicroserviceConsumerMovieApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MicroserviceConsumerMovieApplication.class, args);
+    }
 }

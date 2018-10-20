@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User saveOrUpdateUser(User user) {
         Long id = user.getId();
-        if(id == null || id <=0){
+        if (id == null || id <= 0) {
             id = counter.incrementAndGet();
             user.setId(id);
         }

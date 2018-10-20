@@ -26,38 +26,38 @@ public class UserController {
     }
 
     @GetMapping("list")
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return userRepository.listUser();
     }
 
     @GetMapping("hello")
-    public String getHello(){
+    public String getHello() {
         return "Hello";
     }
 
     @GetMapping("{id}")
-    public User getUser(@PathVariable("id") Long id){
+    public User getUser(@PathVariable("id") Long id) {
         return userRepository.getUserById(id);
     }
 
     @PostMapping("add")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user) {
         return userRepository.saveOrUpdateUser(user);
     }
 
     @PutMapping("update/{id}")
-    public User updateUser(@PathVariable("id") Long id, @RequestBody User user){
+    public User updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         User oldUser = this.getUser(id);
-        if (oldUser != null){
+        if (oldUser != null) {
             user.setId(id);
             return userRepository.saveOrUpdateUser(user);
-        }else{
+        } else {
             return null;
         }
     }
 
     @DeleteMapping("del/{id}")
-    public void deleteUser(@PathVariable("id") Long id){
+    public void deleteUser(@PathVariable("id") Long id) {
         userRepository.delteUser(id);
     }
 

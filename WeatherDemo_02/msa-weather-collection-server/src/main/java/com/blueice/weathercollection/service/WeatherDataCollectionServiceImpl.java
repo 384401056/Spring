@@ -25,11 +25,12 @@ public class WeatherDataCollectionServiceImpl implements WeatherDataCollectionSe
     public void syncDataByCityId(String cityId) {
         String url = WEATHER_API + "?citykey=" + cityId;
         this.saveWeatherData(url);
-        logger.info("同步 "+ cityId +" 天气完成");
+        logger.info("同步 " + cityId + " 天气完成");
     }
 
     /**
      * 保存数据到Redis数据库
+     *
      * @param url
      */
     private void saveWeatherData(String url) {

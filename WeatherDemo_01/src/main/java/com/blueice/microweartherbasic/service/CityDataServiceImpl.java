@@ -20,7 +20,7 @@ public class CityDataServiceImpl implements CityDataService {
         BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()));
         StringBuffer buffer = new StringBuffer();
         String line = "";
-        while ((line = br.readLine()) != null){
+        while ((line = br.readLine()) != null) {
             buffer.append(line);
         }
         br.close();
