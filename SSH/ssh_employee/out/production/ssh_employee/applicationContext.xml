@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context ="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd" >
+
+    <!--引入处部配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--配置c3p0连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置Hibernate,这里的hibernate4要与引的包版本一致才行-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+
+        <!--配置Hibernate的相关属性-->
+        <property name="hibernateProperties">
+            <props>
+                <!--配置方言-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <!--有表就使用，没有就创建-->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+
+        <!--配置hibernate的映射文件-->
+        <property name="mappingResources">
+            <list>
+                <value>com/blueice/domain/Product.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--配置Action的类, scope="prototype"指明action不是单例, 这是通过Spring来管理Action的方式(推荐)-->
+    <bean id="productAction" class="com.blueice.action.ProductAction" scope="prototype">
+        <!--手动注入Service-->
+        <property name="productService" ref="productService"/>
+    </bean>
+
+    <!--配置业务层的类-->
+    <bean id="productService" class="com.blueice.service.ProductService">
+        <!--在Service中注入的Dao-->
+        <property name="productDao" ref="productDao"/>
+    </bean>
+
+    <!--配置Dao层的类-->
+    <bean id="productDao" class="com.blueice.dao.ProductDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+
+
+    <!--配置事务管理器-->
+    <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--开启注解事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>
