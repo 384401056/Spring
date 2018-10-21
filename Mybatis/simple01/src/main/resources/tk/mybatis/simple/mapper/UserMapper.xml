@@ -124,6 +124,47 @@
         </where>
     </select>
 
+    <select id="selectByIdList" resultType="user">
+        select * from sys_user
+        <where>
+            and id in
+            <foreach collection="myList" open="(" separator="," close=")" item="id" index="i">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <!--批量插入数据也支持回写主键值，不过要mybatis:3.3.1后,并且数据库支持才可以，目前mysql是支持的-->
+    <!--<insert id="insertListUser" useGeneratedKeys="true" keyProperty="id">-->
+    <insert id="insertListUser">
+        insert into sys_user(
+          user_name, user_password, user_email, user_info, head_img, create_time
+        )
+        values
+        <!-- separator="," 每循环一次就在最后加逗号-->
+        <foreach collection="userList" item="user" separator=",">
+            (
+            #{user.userName},
+            #{user.userPassword},
+            #{user.userEmail},
+            #{user.userInfo},
+            #{user.headImg, jdbcType=BLOB},
+            #{user.createTime, jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="updateByMap">
+        update sys_user
+        set
+        <foreach collection="_parameter" separator="," index="key" item="val">
+            ${key} = #{val}
+        </foreach>
+        <!--这里的#{key}.使用了map中的key值直接获取对应的value-->
+        where id = #{id}
+    </update>
+
 </mapper>
 
 
