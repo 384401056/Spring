@@ -28,6 +28,4 @@ public class WeatherController {
             @PathVariable("cityName") String cityName) {
         return weatherDataService.getDataByCityName(cityName);
     }
-
-    ;
 }

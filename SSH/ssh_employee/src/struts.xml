@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+    <package name="ssh" namespace="/" extends="struts-default">
+		<!--当访问路径为product_*时，统一由ProductAction去处理, 此外class只需要写名称，是因为Action已经由Spring来管理了,见Spring配置文件中-->
+		<action name="product_*" class="productAction" method="{1}"></action>
+	</package>
+</struts>
