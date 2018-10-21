@@ -13,6 +13,58 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <insert id="insert">
+        insert into sys_user(
+          user_name, user_password, user_email, user_info, head_img, create_time
+        )values (
+         #{userName}, #{userPassword}, #{userEmail}, #{userInfo},
+         #{headImg, jdbcType=BLOB},
+         #{createTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user(
+          user_name, user_password, user_email, user_info, head_img, create_time
+        )values (
+         #{userName}, #{userPassword}, #{userEmail}, #{userInfo},
+         #{headImg, jdbcType=BLOB},
+         #{createTime, jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertAndGetId2">
+        insert into sys_user(
+        user_name, user_password, user_email, user_info, head_img, create_time
+        )values (
+        #{userName}, #{userPassword}, #{userEmail}, #{userInfo},
+        #{headImg, jdbcType=BLOB},
+        #{createTime, jdbcType=TIMESTAMP}
+--         获取插入数据的主键值,当数据库不支持自增主键时，就必须要使用此方法，如:Oracle数据库。
+        <selectKey keyProperty="id" resultType="long" keyColumn="id" order="AFTER">
+--          返回最后插入数据库中的id
+            select LAST_INSERT_ID()
+        </selectKey>
+        )
+    </insert>
+
+
+    <update id="update">
+      update sys_user
+      set
+          user_name = #{userName},
+          user_password = #{userPassword},
+          user_email = #{userEmail},
+          user_info = #{userInfo},
+          head_img = #{headImg, jdbcType=BLOB},
+          create_time = #{createTime, jdbcType=TIMESTAMP}
+      where id=#{id}
+    </update>
+
+    <delete id="delete">
+        delete from sys_user where id=#{id}
+    </delete>
+
     <select id="selectById" resultMap="userMap">
         select * from sys_user where id = #{id}
     </select>
@@ -21,4 +73,73 @@
         select * from sys_user
     </select>
 
+    <select id="selectRolesByUserId" resultType="role">
+        SELECT
+            u.user_name as "user.userName",
+            u.user_password as "user.userPassword",
+            u.user_email as "user.userEmail",
+            r.id,
+            r.role_name,
+            r.enabled,
+            r.create_time
+        FROM
+            sys_user u
+            INNER JOIN sys_user_role ur ON ur.user_id = u.id
+            INNER JOIN sys_role r ON r.id = ur.role_id
+        WHERE u.id = 1
+    </select>
+
+
+    <select id="selectRolesByUserIdAndRoleEnabled" resultType="role">
+        SELECT
+            r.id,
+            r.role_name,
+            r.enabled,
+            r.create_time
+        FROM
+            sys_user u
+            INNER JOIN sys_user_role ur ON ur.user_id = u.id
+            INNER JOIN sys_role r ON r.id = ur.role_id
+        WHERE u.id = #{userId} and r.enabled = #{enable}
+    </select>
+
+
+
+    <select id="selectByUserIdOrUserName" resultType="user">
+        select * from sys_user
+        <where>
+            <choose>
+                <when test="userId != null">
+                    and id = #{userId}
+                </when>
+                <when test="userName != null and userName!='' ">
+                    and user_name = #{userName}
+                </when>
+               <!--这里otherwise的作用是，当userId和userName都为NULL时，
+               SQL语句为：select * from sys_user WHERE 1=2 将不会返回任何结果-->
+                <otherwise>
+                    and 1=2
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
