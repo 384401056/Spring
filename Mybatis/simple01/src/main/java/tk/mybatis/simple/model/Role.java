@@ -11,6 +11,15 @@ public class Role {
     private Integer enabled;
     private Long createBy;
     private Date createTime;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -50,5 +59,17 @@ public class Role {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", enabled=" + enabled +
+                ", createBy=" + createBy +
+                ", createTime=" + createTime +
+                ", user=" + user +
+                '}';
     }
 }
