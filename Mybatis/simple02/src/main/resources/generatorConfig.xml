@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="MySqlContext" defaultModelType="flat" targetRuntime="MyBatis3">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--注释-->
+        <commentGenerator>
+            <property name="suppressData" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接-->
+        <jdbcConnection
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:3306/mybatis"
+                userId="root"
+                password="123456"
+        >
+        </jdbcConnection>
+
+
+        <!--model interface xml 文件的位置-->
+        <javaModelGenerator targetPackage="com.blueice.model" targetProject="src\main\java">
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.blueice.mapper"  targetProject="src\main\resources">
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.blueice.mapper" targetProject="src\main\java">
+        </javaClientGenerator>
+
+        <!--所有数据库表-->
+        <table tableName="%">
+            <generatedKey column="id" sqlStatement="mysql"/>
+        </table>
+    </context>
+
+</generatorConfiguration>

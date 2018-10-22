@@ -1,11 +1,9 @@
 package test.UserTest;
 
 import com.google.common.collect.Lists;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.collections.Maps;
 import test.BaseMapperTest;
 import tk.mybatis.simple.mapper.UserMapper;
 import tk.mybatis.simple.model.Role;
