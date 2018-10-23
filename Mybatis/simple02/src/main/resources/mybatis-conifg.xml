@@ -6,6 +6,8 @@
         <setting name="logImpl" value="LOG4J"/>
         <!--数据库字库下划线名自动转驼峰名-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--延迟属性的调用是按需加载，为true则第一次就全部加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <typeAliases>

@@ -108,6 +108,14 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectRoleById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated

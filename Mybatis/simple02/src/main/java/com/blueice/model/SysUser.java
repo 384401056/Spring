@@ -1,5 +1,6 @@
 package com.blueice.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -93,6 +94,18 @@ public class SysUser {
      *
      * @mbg.generated Tue Oct 23 03:48:34 CST 2018
      */
+
+
+    private SysRole role;
+
+    public SysRole getRole() {
+        return role;
+    }
+
+    public void setRole(SysRole role) {
+        this.role = role;
+    }
+
     public Long getId() {
         return id;
     }
@@ -251,5 +264,19 @@ public class SysUser {
      */
     public void setHeadImg(byte[] headImg) {
         this.headImg = headImg;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", createTime=" + createTime +
+                ", userInfo='" + userInfo + '\'' +
+                ", headImg=" + Arrays.toString(headImg) +
+                ", role=" + role +
+                '}';
     }
 }
