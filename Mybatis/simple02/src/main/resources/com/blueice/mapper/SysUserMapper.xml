@@ -499,4 +499,65 @@
         INNER join sys_user_role ur on ur.user_id = u.id
         where u.id = #{id}
     </select>
+
+    <!--1对多-->
+    <resultMap id="userRoleListMap" extends="ResultMapWithBLOBs" type="SysUser">
+        <collection property="roleList"
+                    columnPrefix="role_"
+                    resultMap="com.blueice.mapper.SysRoleMapper.BaseResultMap"/>
+    </resultMap>
+    <select id="selectAllUserAndRole" resultMap="userRoleListMap">
+        select
+        u.id,
+        u.user_name,
+        u.user_password,
+        u.user_email,
+        u.user_info,
+        u.head_img,
+        u.create_time,
+        r.id role_id,
+        r.role_name role_role_name,
+        r.enabled role_enabled,
+        r.create_by role_create_by,
+        r.create_time role_create_time
+
+        from sys_user u
+        INNER join sys_user_role ur on ur.user_id = u.id
+        INNER join sys_role r on ur.role_id = r.id
+    </select>
+
+    <!--1对多-->
+    <resultMap id="userRolePrivilageListMap" extends="ResultMapWithBLOBs" type="SysUser">
+        <collection property="roleList"
+                    columnPrefix="role_"
+                    resultMap="com.blueice.mapper.SysRoleMapper.rolePrivilegeListMap"/>
+    </resultMap>
+    <select id="selectAllUserAndRoleAndPri" resultMap="userRolePrivilageListMap">
+        select
+        u.id,
+        u.user_name,
+        u.user_password,
+        u.user_email,
+        u.user_info,
+        u.head_img,
+        u.create_time,
+
+        <!--注意：这里的映射属性要前缀 role_-->
+        r.id role_id,
+        r.role_name role_role_name,
+        r.enabled role_enabled,
+        r.create_by role_create_by,
+        r.create_time role_create_time,
+
+        <!--注意：这里的映射属性要加二层前缀 role_privilage_-->
+        p.id role_privilege_id,
+        p.privilege_name role_privilage_privilege_name,
+        p.privilege_url role_privilage_privilege_url
+
+        from sys_user u
+        INNER join sys_user_role ur on ur.user_id = u.id
+        INNER join sys_role r on ur.role_id = r.id
+        INNER join sys_role_privilege rp on rp.role_id = r.id
+        INNER join sys_privilege p on p.id = rp.privilege_id
+    </select>
 </mapper>

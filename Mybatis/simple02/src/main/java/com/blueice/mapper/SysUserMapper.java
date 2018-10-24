@@ -126,4 +126,8 @@ public interface SysUserMapper {
     SysUser userRoleMapSelect(Long id);//association中嵌套查询
 
     SysUser userRoleMapSelectLazy(Long id);//association中嵌套查询之懒加载
+
+    List<SysUser> selectAllUserAndRole();//使用collection进行一对多查询
+
+    List<SysUser> selectAllUserAndRoleAndPri();//使用collection进行一对多的嵌套查询
 }

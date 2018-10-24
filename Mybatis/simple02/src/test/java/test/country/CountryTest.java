@@ -47,36 +47,4 @@ public class CountryTest extends BaseMapperTest {
         }
     }
 
-
-    @Test
-    public void selectUserAndRoleById() {
-        SqlSession sqlSession = getSqlsession();
-        try {
-            SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
-//            SysUser user = mapper.selectUserAndRoleById(1L);
-//            SysUser user = mapper.selectUserAndRoleById2(1L);
-            SysUser user = mapper.userRoleMapSelect(1001L);
-            System.out.println("user:"+user.toString());
-            Assert.assertTrue(user != null);
-
-        } finally {
-            sqlSession.close();
-        }
-    }
-
-    @Test
-    public void selectUserAndRoleByIdLazyLoad() {
-        SqlSession sqlSession = getSqlsession();
-        try {
-            SysUserMapper mapper = sqlSession.getMapper(SysUserMapper.class);
-            SysUser user = mapper.userRoleMapSelectLazy(1001L);
-            Assert.assertTrue(user != null);
-            System.out.println("调用 user.getRole()");
-            Assert.assertNotNull(user.getRole());//只有在调用getRole()方法里，才会去执行第二条sql查询
-            System.out.println("user:"+user.toString());
-        } finally {
-            sqlSession.close();
-        }
-    }
-
 }
