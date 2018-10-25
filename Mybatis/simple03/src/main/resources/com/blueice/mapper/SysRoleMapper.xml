@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blueice.mapper.SysRoleMapper">
+
+
+  <!--
+    开启Mybatis的二级缓存，
+    readOnly为true时，说明为可读写，则SysRole对象要进行序列化处理。
+  -->
+  <cache
+          eviction="FIFO"
+          flushInterval="60000"
+          size="512"
+          readOnly="false"
+  />
+
+
   <resultMap id="BaseResultMap" type="com.blueice.model.SysRole">
     <!--
       WARNING - @mbg.generated

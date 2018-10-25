@@ -1,7 +1,10 @@
 package com.blueice.mapper;
 
 import com.blueice.model.SysUser;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
+import java.util.Map;
 
 public interface SysUserMapper {
     /**
@@ -44,12 +47,13 @@ public interface SysUserMapper {
      */
     int updateByPrimaryKey(SysUser record);
 
-    /**
-     * 调用存储过程
-     * @param user
-     */
+    //调用存储过程,根据id查询用户.
     void selectUserById(SysUser user);
 
+    //调用存储过程.根据用户名模糊查询，并分页.
+    List<SysUser> selectUserPage(Map<String, Object> params);
 
+    //调用存储过程.添加用户，并设置角色.
+    int insertUserAndRole(@Param("user")SysUser user, @Param("roleIds")String roleIds);
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.blueice.mapper.SysUserMapper">
+
   <resultMap id="BaseResultMap" type="com.blueice.model.SysUser">
     <!--
       WARNING - @mbg.generated
@@ -40,6 +41,8 @@
       #{userEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{userInfo,jdbcType=LONGVARCHAR}, 
       #{headImg,jdbcType=LONGVARBINARY})
   </insert>
+
+
   <update id="updateByPrimaryKey" parameterType="com.blueice.model.SysUser">
     <!--
       WARNING - @mbg.generated
@@ -90,6 +93,31 @@
     }
   </select>
 
+  <!--total会增加到传入的map中-->
+  <select id="selectUserPage" statementType="CALLABLE" useCache="true" resultMap="BaseResultMap">
+    {
+      call select_user_page(
+        #{userName, mode=IN},
+        #{offset, mode=IN},
+        #{limit, mode=IN},
+        #{total, mode=OUT, jdbcType=BIGINT}
+      )
+    }
+  </select>
 
+  <insert id="insertUserAndRole" statementType="CALLABLE">
+    {
+      call insert_user_and_roles(
+        #{user.id, mode=OUT, jdbcType=BIGINT},
+        #{user.userName, mode=IN},
+        #{user.userPassword, mode=IN},
+        #{user.userEmail, mode=IN},
+        #{user.userInfo, mode=IN},
+        #{user.headImg, mode=IN, jdbcType=BLOB},
+        #{user.createTime, mode=OUT, jdbcType=TIMESTAMP},
+        #{roleIds, mode=IN}
+      )
+    }
+  </insert>
 
 </mapper>
