@@ -43,4 +43,13 @@ public interface SysUserMapper {
      * @mbg.generated Wed Oct 24 18:08:38 CST 2018
      */
     int updateByPrimaryKey(SysUser record);
+
+    /**
+     * 调用存储过程
+     * @param user
+     */
+    void selectUserById(SysUser user);
+
+
+
 }

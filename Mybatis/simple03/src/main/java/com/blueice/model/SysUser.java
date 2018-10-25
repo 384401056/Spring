@@ -1,5 +1,6 @@
 package com.blueice.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -251,5 +252,18 @@ public class SysUser {
      */
     public void setHeadImg(byte[] headImg) {
         this.headImg = headImg;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", createTime=" + createTime +
+                ", userInfo='" + userInfo + '\'' +
+                ", headImg=" + Arrays.toString(headImg) +
+                '}';
     }
 }
