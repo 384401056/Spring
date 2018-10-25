@@ -6,8 +6,18 @@
   <!--
     开启Mybatis的二级缓存，
     readOnly为true时，说明为可读写，则SysRole对象要进行序列化处理。
+    还要设置接口文件的参照缓存
   -->
+  <!--<cache-->
+          <!--eviction="FIFO"-->
+          <!--flushInterval="60000"-->
+          <!--size="512"-->
+          <!--readOnly="false"-->
+  <!--/>-->
+
+  <!--使用mybatis-redis缓存框架, 还要设置接口文件的参照缓存-->
   <cache
+          type="org.mybatis.caches.redis.RedisCache"
           eviction="FIFO"
           flushInterval="60000"
           size="512"

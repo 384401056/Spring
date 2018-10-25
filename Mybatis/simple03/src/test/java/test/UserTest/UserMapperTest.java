@@ -78,19 +78,37 @@ public class UserMapperTest extends BaseMapperTest {
     }
 
     /**
-     * SysRole设置了二级缓存后的测试.
+     * SysRole设置了二级缓存后的测试.注意：设置可读可写的二级缓存,Java对象要进行序列化。
+     * (一种是mybatis自带的二级缓存，一种是mybatis-redis框架，注意在SysRoleMapper.xml中修改后再看运行效果)
+     * 当使用mybatis-redis时，无论后续运行多少次程序，都是从缓存中读取.
+     * 日志中的Cache Hit Ratio就是缓存命中率。.0
      */
     @Test
     public void testCach2(){
+        SysRole role1 = null;
         SqlSession sqlSession = getSqlsession();
         try {
             SysRoleMapper mapper = sqlSession.getMapper(SysRoleMapper.class);
-            SysRole role1 = mapper.selectByPrimaryKey(1L);
+            role1 = mapper.selectByPrimaryKey(1L);
             role1.setRoleName("New Name");
-            SysRole role2 = mapper.selectByPrimaryKey(1L);
+            SysRole role2 = mapper.selectByPrimaryKey(1L); //此时触发一级缓存,一级缓存的作用只在SqlSession的生命周期内。
             Assert.assertEquals("New Name", role2.getRoleName());
+
         } finally {
-            sqlSession.rollback();
+            sqlSession.close(); //当sqlsession关闭时，查询数据才会保存到二级缓存中。
+        }
+
+        System.out.println("开启新的Sqlsession");
+
+        sqlSession = getSqlsession();
+        try {
+            SysRoleMapper mapper = sqlSession.getMapper(SysRoleMapper.class);
+            SysRole role2 = mapper.selectByPrimaryKey(1L);//触发二级缓存
+            Assert.assertEquals("New Name", role2.getRoleName());
+            Assert.assertNotEquals(role1, role2);
+            SysRole role3 = mapper.selectByPrimaryKey(1L);//触发二级缓存
+            Assert.assertNotEquals(role2, role3);
+        } finally {
             sqlSession.close();
         }
     }
