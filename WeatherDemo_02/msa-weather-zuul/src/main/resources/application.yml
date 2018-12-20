@@ -10,13 +10,28 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://192.168.1.101:8761/eureka
 
 zuul:
   routes:
-    city:
-      path: /city/**
-      serviceId: city-server
+    city:/city/**
+  # 以上为简写方式。
+
+  #    city:
+  #      path: /city/**
+  #      serviceId: city-server
     date:
       path: /data/**
       serviceId: data-server
+      sensitiveHeaders:
+      #上一行为设置敏感头部头信息为空，这样对zuul的请求就可以传递Cookies了
+
+
+  ignored-patterns:
+    - /**/cities
+    - /city/aaa
+  # 排除接口，让其不可从外部访问
+
+
+
+
