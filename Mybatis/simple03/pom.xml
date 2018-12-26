@@ -96,8 +96,6 @@
             <artifactId>mybatis-redis</artifactId>
             <version>1.0.0-beta2</version>
         </dependency>
-        
-
     </dependencies>
 
     <build>
